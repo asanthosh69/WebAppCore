@@ -41,7 +41,7 @@ jobs:
           name: Copy build content of  Project WebApp
           working_directory: C:\Users\circleci\project\WebApp\WebAppCore\bin\Release
           command: |
-            Copy-Item -Path .\Package\ -Destination C:\Users\circleci\project\WebApp-Build -Force -Recurse
+            Copy-Item -Path .\netcoreapp2.1\ -Destination C:\Users\circleci\project\WebApp-Build -Force -Recurse
       - run:
           name: list
           working_directory:  C:\Users\circleci\project
