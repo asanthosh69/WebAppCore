@@ -36,7 +36,7 @@ jobs:
   #C:\Users\circleci\project\WebApp\WebAppCore\bin\Release
       - run:
           name: "Build Application according to some given configuration"
-          command: dotnet.exe build --configuration Release
+          command: dotnet.exe publish --configuration Release
       - run:
           name: Copy build content of  Project WebApp
           working_directory: C:\Users\circleci\project\WebApp\WebAppCore\obj\Release
