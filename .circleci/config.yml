@@ -15,16 +15,16 @@ jobs:
           name: Clone EnageWebService
           working_directory: C:\Users\circleci\project
           command: git clone -b << pipeline.git.branch >> https://github.com/asanthosh69/EnageWebService.git
-      - run:
-          name: List Projects
-          working_directory: C:\Users\circleci\project
-          command: ls
-          
+               
       - run:
           name: Build Project
           working_directory: C:\Users\circleci\project\EnageWebService
           command: MSBuild.exe -m EnageWebService.sln /t:Rebuild /p:DeployOnBuild=true /p:Configuration=Release  /p:SkipPostSharp=true
-           
+      - run:
+          name: Copy build content of  Project EngageWebService
+          working_directory: C:\Users\circleci\project\EnageWebService\bin
+          command:  Copy-Item -Path .\Release\ -Destination C:\Users\circleci\project\EngageWebService-Build -Force -Recurse     
+
       - run:
           name: List Projects
           working_directory: C:\Users\circleci\project
@@ -33,10 +33,26 @@ jobs:
       - run:
           name: "Install project dependencies"
           command: dotnet.exe restore                  
-  
+  #C:\Users\circleci\project\WebApp\WebAppCore\bin\Release
       - run:
           name: "Build Application according to some given configuration"
           command: dotnet.exe build --configuration Release
+      - run:
+          name: Copy build content of  Project WebApp
+          working_directory: C:\Users\circleci\project\WebApp\WebAppCore\bin\Release
+          command: |
+            Copy-Item -Path .\Package\ -Destination C:\Users\circleci\project\WebApp-Build -Force -Recurse
+      - run:
+          name: list
+          working_directory:  C:\Users\circleci\project
+          command:  dir
+
+      - persist_to_workspace:
+          root: C:\Users\circleci\project
+          paths:
+            - EngageWebService-Build            
+            - WebApp-Build            
+
 workflows:
   publish_and_build:
     jobs:
