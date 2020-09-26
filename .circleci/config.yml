@@ -88,7 +88,7 @@ jobs:
              mkdir ~/repo/project/.aws
              touch ~/repo/project/.aws/config
              chmod 600  ~/repo/project/.aws/config
-             echo "[profile default]" > ~/repo/project/.aws/config
+             echo "[profile saamaws]" > ~/repo/project/.aws/config
              echo "aws_access_key_id=$AWS_ACCESS_KEY_ID" >> ~/repo/project/.aws/config
              echo "aws_secret_access_key=$AWS_SECRET_ACCESS_KEY" >> ~/repo/project/.aws/config
       - run:
