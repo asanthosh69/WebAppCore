@@ -95,8 +95,8 @@ jobs:
           name: EB Upload and Deploy
           working_directory: ~/repo/project
           command: |
-            eb init --region us-east-2 --platform iis-10.0 WebAppCore
-            eb create --keyname saamaws.pem WebAppCore-dev
+            eb init --region ap-south-1 --platform iis-10.0 WebAppCore
+            eb create --keyname saamumpk.pem WebAppCore-dev
             #eb deploy WebClient-dev1        
 
 workflows:
