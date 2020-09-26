@@ -81,7 +81,23 @@ jobs:
           working_directory: ~/repo/project
           command: |
            # sudo pip install --upgrade pip
-           sudo pip install awsebcli --upgrade    
+           sudo pip install awsebcli --upgrade
+      - run:
+          name: Create AWS credentials manually
+          command: |
+             mkdir ~/repo/project/.aws
+             touch ~/repo/project/.aws/config
+             chmod 600  ~/repo/project/.aws/config
+             echo "[profile default]" > ~/repo/project/.aws/config
+             echo "aws_access_key_id=$AWS_ACCESS_KEY_ID" >> ~/repo/project/.aws/config
+             echo "aws_secret_access_key=$AWS_SECRET_ACCESS_KEY" >> ~/repo/project/.aws/config
+      - run:
+          name: EB Upload and Deploy
+          working_directory: ~/repo/project
+          command: |
+            eb init --region us-east-1 --platform iis-10.0 WebAppCore
+            eb create --keyname saamaws.pem WebAppCore-dev
+            #eb deploy WebClient-dev1        
 
 workflows:
   publish_and_build:
@@ -97,4 +113,4 @@ workflows:
           filters:
             branches:
               only:
-                - << pipeline.git.branch >>
+                - << pipeline.git.branch >>                
