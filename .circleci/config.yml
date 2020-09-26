@@ -36,10 +36,10 @@ jobs:
   #C:\Users\circleci\project\WebApp\WebAppCore\bin\Release
       - run:
           name: "Build Application according to some given configuration"
-          command: dotnet.exe publish --configuration Release
+          command: dotnet build WebAppCore.sln /p:PublishProfile=Release /p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:platform="Any CPU" /p:configuration="Release" 
       - run:
           name: Copy build content of  Project WebApp
-          working_directory: C:\Users\circleci\project\WebApp\WebAppCore\obj\Release
+          working_directory: C:\Users\circleci\project\WebApp\WebAppCore\bin\Release
           command: |
             Copy-Item -Path .\netcoreapp2.1\ -Destination C:\Users\circleci\project\WebApp-Build -Force -Recurse
       - run:
