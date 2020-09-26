@@ -15,7 +15,11 @@ jobs:
           name: Clone EnageWebService
           working_directory: C:\Users\circleci\project
           command: git clone -b << pipeline.git.branch >> https://github.com/asanthosh69/EnageWebService.git
-           
+      - run:
+          name: List Projects
+          working_directory: C:\Users\circleci\project
+          command: ls
+          
       - run:
           name: Build Project
           command: MSBuild.exe -m EnageWebService.sln /t:Rebuild /p:DeployOnBuild=true /p:Configuration=Release  /p:SkipPostSharp=true
