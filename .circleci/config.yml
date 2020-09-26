@@ -35,8 +35,4 @@ jobs:
 workflows:
   publish_and_build:
     jobs:
-      - publish:      
-          filters:
-            branches:
-              only:
-                - << pipeline.git.branch >>
+      - publish          
