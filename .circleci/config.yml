@@ -39,7 +39,7 @@ jobs:
           command: dotnet.exe build --configuration Release
       - run:
           name: Copy build content of  Project WebApp
-          working_directory: C:\Users\circleci\project\WebApp\WebAppCore\bin\Release
+          working_directory: C:\Users\circleci\project\WebApp\WebAppCore\obj\Release
           command: |
             Copy-Item -Path .\netcoreapp2.1\ -Destination C:\Users\circleci\project\WebApp-Build -Force -Recurse
       - run:
@@ -51,9 +51,32 @@ jobs:
           root: C:\Users\circleci\project
           paths:
             - EngageWebService-Build            
-            - WebApp-Build            
+            - WebApp-Build
+  deploy:
+    docker:
+    - image: circleci/python:3.6.4
+    description: Deploy
+    steps:     
+      - attach_workspace:
+          at: ~/repo/project
+      - run:
+          name: List Data
+          working_directory: ~/repo/project/WebApp-Build
+          command: |
+            ls               
 
 workflows:
   publish_and_build:
     jobs:
-      - publish    
+      - publish
+      - Hold:
+          type: approval
+          requires:
+            - publish
+      - deploy:          
+          requires:
+            - Hold
+          filters:
+            branches:
+              only:
+                - << pipeline.git.branch >>
