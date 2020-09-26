@@ -11,10 +11,10 @@ jobs:
       name: windows/default
     steps:
       - checkout
-        - run:
-            name: List Projects
-            working_directory: C:\Users\circleci\project
-            command: dir
+      - run:
+          name: List Projects
+          working_directory: C:\Users\circleci\project
+          command: dir
 
       - run:
           name: "Install project dependencies"
