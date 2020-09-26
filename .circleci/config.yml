@@ -22,6 +22,7 @@ jobs:
           
       - run:
           name: Build Project
+          working_directory: C:\Users\circleci\project\EnageWebService
           command: MSBuild.exe -m EnageWebService.sln /t:Rebuild /p:DeployOnBuild=true /p:Configuration=Release  /p:SkipPostSharp=true
            
       - run:
