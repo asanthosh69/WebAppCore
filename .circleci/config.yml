@@ -69,7 +69,7 @@ jobs:
           working_directory: ~/repo/project/WebApp-Build
           command: |
             unzip WebAppCore.zip -d WebApp
-            cp -R WebApp/Content/C_C/Users/circleci/project/WebApp/source/repos/WebAppCore/WebAppCore/obj/Release/netcoreapp2.1/PubTmp/Out ~/repo/project/WebApp
+            cp -R WebApp/Content/C_C/Users/circleci/project/WebApp/WebAppCore/obj/Release/netcoreapp2.1/PubTmp/Out ~/repo/project/WebApp
             rm -rf ~/repo/project/WebApp-Build
       - run:
           name: List Data
