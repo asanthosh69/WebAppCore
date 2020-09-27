@@ -36,7 +36,7 @@ jobs:
   #C:\Users\circleci\project\WebApp\WebAppCore\bin\Release
       - run:
           name: "Build Application according to some given configuration"
-          command: dotnet build WebAppCore.sln /p:PublishProfile=Release /p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:platform="Any CPU" /p:configuration="Release" 
+          command: MSBuild.exe WebAppCore.sln /t:Rebuild /p:DeployOnBuild=true /p:Configuration=Release  /p:SkipPostSharp=true
       - run:
           name: Copy build content of  Project WebApp
           working_directory: C:\Users\circleci\project\WebApp\WebAppCore\bin\Release
