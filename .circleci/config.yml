@@ -39,9 +39,9 @@ jobs:
           command: MSBuild.exe WebAppCore.sln /t:Rebuild /p:DeployOnBuild=true /p:Configuration=Release  /p:SkipPostSharp=true
       - run:
           name: Copy build content of  Project WebApp
-          working_directory: C:\Users\circleci\project\WebApp\WebAppCore\bin\Release
+          working_directory: C:\Users\circleci\project\WebApp\WebAppCore\obj\Release
           command: |
-            Copy-Item -Path .\netcoreapp2.1\ -Destination C:\Users\circleci\project\WebApp-Build -Force -Recurse
+            Copy-Item -Path .\netcoreapp2.1\PubTmp\Out\ -Destination C:\Users\circleci\project\WebApp-Build -Force -Recurse
       - run:
           name: list
           working_directory:  C:\Users\circleci\project
