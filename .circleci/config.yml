@@ -100,7 +100,7 @@ jobs:
           command: |
             eb init --region ap-south-1 --platform iis-10.0 Webappcore-env
             #eb create  WebAppCore-dev
-            eb deploy WebClient-dev1        
+            eb deploy WebAppCore-dev        
 
 workflows:
   publish_and_build:
