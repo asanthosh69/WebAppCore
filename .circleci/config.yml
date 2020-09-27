@@ -68,7 +68,7 @@ jobs:
           name: List Data
           working_directory: ~/repo/project/WebApp-Build
           command: |
-            cp -R C:/Users/circleci/project/WebApp/WebAppCore/obj/Release/netcoreapp2.1/PubTmp/Out ~/repo/project/WebApp
+            cp -R C:/Users/circleci/project/WebApp-Build ~/repo/project/WebApp
             rm -rf ~/repo/project/WebApp-Build
       - run:
           name: List Data
