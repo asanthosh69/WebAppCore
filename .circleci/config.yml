@@ -56,7 +56,10 @@ jobs:
     docker:
     - image: circleci/python:3.6.4
     description: Deploy
-    steps:     
+    steps:
+      - add_ssh_keys:
+          fingerprints:
+            - "76:02:b0:2f:24:55:89:2e:89:fe:01:c6:85:0d:6e:38"
       - attach_workspace:
           at: ~/repo/project
       - run:
@@ -75,7 +78,7 @@ jobs:
           name: List Data
           working_directory: ~/repo/project
           command: |
-            ls
+            ls            
       - run:
           name: Installing deployment dependencies
           working_directory: ~/repo/project
@@ -88,15 +91,15 @@ jobs:
              mkdir ~/repo/project/.aws
              touch ~/repo/project/.aws/config
              chmod 600  ~/repo/project/.aws/config
-             echo "[profile default]" > ~/repo/project/.aws/config
+             echo "[profile saamaws]" > ~/repo/project/.aws/config
              echo "aws_access_key_id=$AWS_ACCESS_KEY_ID" >> ~/repo/project/.aws/config
              echo "aws_secret_access_key=$AWS_SECRET_ACCESS_KEY" >> ~/repo/project/.aws/config
       - run:
           name: EB Upload and Deploy
           working_directory: ~/repo/project
           command: |
-            eb init --region us-east-1 --platform iis-10.0 WebAppCore
-            eb create --keyname saamaws.pem WebAppCore-dev
+            eb init --region ap-south-1 --platform iis-10.0 Webappcore-env
+            eb create  WebAppCore-dev
             #eb deploy WebClient-dev1        
 
 workflows:
@@ -114,3 +117,4 @@ workflows:
             branches:
               only:
                 - << pipeline.git.branch >>                
+
