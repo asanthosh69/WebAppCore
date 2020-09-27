@@ -42,6 +42,7 @@ jobs:
           working_directory: C:\Users\circleci\project\WebApp\WebAppCore\obj\Release
           command: |
             Copy-Item -Path .\netcoreapp2.1\PubTmp\Out\ -Destination C:\Users\circleci\project\WebApp-Build -Force -Recurse
+            Copy-Item -Path C:\Users\circleci\project\WebApp\.ebextensions -Destination C:\Users\circleci\project -Force -Recurse
       - run:
           name: list
           working_directory:  C:\Users\circleci\project
@@ -52,6 +53,7 @@ jobs:
           paths:
             - EngageWebService-Build            
             - WebApp-Build
+            - .ebextensions
   deploy:
     docker:
     - image: circleci/python:3.6.4
@@ -98,8 +100,8 @@ jobs:
           working_directory: ~/repo/project
           command: |
             eb init --region us-east-1 --platform iis-10.0 Webappcore-env
-            eb create  WebAppCore-dev
-            #eb deploy WebAppCore-dev        
+            #eb create  WebAppCore-dev
+            eb deploy WebAppCore-dev        
 
 workflows:
   publish_and_build:
