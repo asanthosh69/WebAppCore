@@ -56,10 +56,7 @@ jobs:
     docker:
     - image: circleci/python:3.6.4
     description: Deploy
-    steps:
-      - add_ssh_keys:
-          fingerprints:
-            - "76:02:b0:2f:24:55:89:2e:89:fe:01:c6:85:0d:6e:38"
+    steps:     
       - attach_workspace:
           at: ~/repo/project
       - run:
@@ -98,9 +95,9 @@ jobs:
           name: EB Upload and Deploy
           working_directory: ~/repo/project
           command: |
-            eb init --region ap-south-1 --platform iis-10.0 Webappcore-env
-            #eb create  WebAppCore-dev
-            eb deploy WebAppCore-dev        
+            eb init --region us-east-1 --platform iis-10.0 Webappcore-env
+            eb create --keyname saamumpk.pem WebAppCore-dev
+            #eb deploy WebAppCore-dev        
 
 workflows:
   publish_and_build:
