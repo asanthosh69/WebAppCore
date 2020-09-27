@@ -100,8 +100,8 @@ jobs:
           working_directory: ~/repo/project
           command: |
             eb init --region us-east-1 --platform iis-10.0 Webappcore-env
-            #eb create  WebAppCore-dev
-            eb deploy WebAppCore-dev        
+            eb create  --keyname saamuspk WebAppCore-dev
+            #eb deploy WebAppCore-dev        
 
 workflows:
   publish_and_build:
